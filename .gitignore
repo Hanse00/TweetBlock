@@ -6,3 +6,6 @@
 
 #Ignore eclipse bin files
 bin
+
+#Don't share libraries
+lib

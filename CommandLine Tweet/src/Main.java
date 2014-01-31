@@ -1,8 +1,32 @@
+import twitter4j.Status;
+import twitter4j.Twitter;
+import twitter4j.TwitterException;
+import twitter4j.TwitterFactory;
+import twitter4j.conf.ConfigurationBuilder;
+
+
 public class Main {
 
 	public static void main(String[] args) {
-		System.out.println("Hello World!");
-
+		ConfigurationBuilder cb = new ConfigurationBuilder();
+		
+		cb.setDebugEnabled(true)
+			.setOAuthConsumerKey("XXX")
+			.setOAuthConsumerSecret("XXX")
+			.setOAuthAccessToken("XXX")
+			.setOAuthAccessTokenSecret("XXX");
+		
+		TwitterFactory tf = new TwitterFactory(cb.build());
+		Twitter twitter = tf.getInstance();
+		
+		try {
+			Status status = twitter.updateStatus("Hail the internet overloards.");
+			System.out.println("Updated status to: " + status.getText());
+		} catch (TwitterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
 	}
-
 }
