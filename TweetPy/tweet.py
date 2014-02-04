@@ -1,70 +1,47 @@
-import tweepy, traceback
+import sys, tweepy
 
-#Identifies the sending party (Us)
-consumer_key = "XXX"
-consumer_secret = "XXX"
+'''
+Takes: minecraft username, message
+Returns: Nothing
 
-#Info to access the twitter account that'll send on our behalf
+This script is used to tweet the given user, with the given
+message.
+'''
+
+get_consumer_key = "XXX"
+get_consumer_secret = "XXX"
+
+post_consumer_key = "XXX"
+post_consumer_secret = "XXX"
+
 tweetblock_access_token = "XXX"
 tweetblock_access_token_secret = "XXX"
 
-user_access_token = ""
+f = open("users", "a")
+f.close()
 
-message = ""
+if len(sys.argv) > 2:
+    user = sys.argv[1]
+    message = sys.argv[2]
 
-user_found = False
+    get_auth = tweepy.OAuthHandler(get_consumer_key, get_consumer_secret)
 
-auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
+    with open("users", "r") as f:
+        for line in f:
+            if user in line:
+                user_access_token = line[line.find("oauth_token=") + 12:-1]
+                user_access_token_secret = line[line.find("oauth_token_secret=") + 19:line.find("&")]
 
-#Make sure users file exists
-tempFile = open("users", "a")
-tempFile.close()
+                get_auth.set_access_token(user_access_token, user_access_token_secret)
 
-user = raw_input("Who would you like to tweet? ")
+    user_api = tweepy.API(get_auth)
+    username = user_api.me().screen_name
 
-with open("users", "r") as f:
-    for line in f:
-        #If the given username is in the system, load their details
-        if user in line:
-            user_access_token = line[line.find("oauth_token=") + 12:-1]
-            user_access_token_secret = line[line.find("oauth_token_secret=") + 19:line.find("&")]
+    post_auth = tweepy.OAuthHandler(post_consumer_key, post_consumer_secret)
+    post_auth.set_access_token(tweetblock_access_token, tweetblock_access_token_secret)
+    tweetblock_api = tweepy.API(post_auth)
 
-            auth.set_access_token(user_access_token, user_access_token_secret)
-            user_found = True
-
-#Otherwise use a request token to get permissions
-if user_found == False:
-    request = auth.get_authorization_url()
-
-    while user_access_token == "":
-        print "Go to the following URL to authorize TweetBlock:",
-        print request
-        pin = raw_input("Enter pin: ")
-
-        try:
-            user_access_token = auth.get_access_token(pin)
-        except TweepError:
-            traceback.print_exc()
-
-user_api = tweepy.API(auth)
-username = user_api.me().screen_name
-
-print username
-
-#If user wasn't previosuly in the system, store them for later use
-if user_found == False:
-    with open("users", "a") as f:
-        f.write(username + ":" + str(user_access_token) + "\n")
-
-while message == "":
-    print "What would you like me to tweet you master?"
-    message = raw_input("Message: ")
-
-#authenticate as sending account
-auth.set_access_token(tweetblock_access_token, tweetblock_access_token_secret)
-tweetblock_api = tweepy.API(auth)
-
-#Send the requested tweet
-status = "@" + username + " " + message
-tweetblock_api.update_status(status)
-print status
+    status = "@" + username + " " + message
+    tweetblock_api.update_status(status)
+else:
+    print "Usage: tweet.py <user> <message>"
