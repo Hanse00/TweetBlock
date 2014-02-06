@@ -3,13 +3,16 @@ TweetBlock
 
 A minecraft mod which adds twitter functionality in the form of a block.
 
-Dependencies
+License
 ----------
 
-### CommandLine Tweet
-The Java program uses the [Twitter4J](http://twitter4j.org/) Java library for OAuth and Twitter API functionality.
+### TweetBlock
+TweetBlock is licensed under the MIT license, the basic gist of this license is: do whatever you want, just don't hold me liable.
 
-Simply download the [twitter4j-3.0.5.zip](http://twitter4j.org/archive/twitter4j-3.0.5.zip) file and add it to the projects build path.
+For the Twitter API code, I use the [Twitter4J](http://twitter4j.org/) Java library. It's licensed under the Apache 2.0 license.
 
-### TweetPy
-The Python script uses [tweepy](https://github.com/tweepy/tweepy) for Oauth and Twitter API functionality.
+More details on the licenses can be found in the LICENSE file.
+
+###Dependencies
+The Java code relies on [Twitter4J](http://twitter4j.org/) to communicate with the Twitter API, the library can be downloaded at [twitter4j-3.0.5.zip](http://twitter4j.org/archive/twitter4j-3.0.5.zip).
+After downloading the file, add twitter4j-core-3.0.5.jar to the project build path.
