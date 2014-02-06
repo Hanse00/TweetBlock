@@ -1,0 +1,18 @@
+[
+{
+  "modid" : "TweetBlock",
+  "name" : "TweetBlock",
+  "version" : "Alpha 1",
+  "credits" : "Thanks to Vswe and Pahimar for great modding resources",
+  "authors": [
+    "Hanse00"
+  ],
+  "description": "Tweet yourself notifications from an ingame block",
+  "url" : "https://github.com/Hanse00/TweetBlock",
+  "updateUrl" : "",
+  "logoFile" : "",
+  "parent" : "",
+  "screenshots": [
+  ]
+}
+]
