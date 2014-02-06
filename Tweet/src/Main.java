@@ -12,15 +12,18 @@ public class Main {
 		TweetHandler getHandler = new TweetHandler(Reference.GET_CONSUMER_KEY, Reference.GET_CONSUMER_SECRET);
 		TweetHandler postHandler = new TweetHandler(Reference.POST_CONSUMER_KEY, Reference.POST_CONSUMER_SECRET, Reference.ACCESS_TOKEN, Reference.ACCESS_SECRET);
 		
+		System.out.println("Open the following link to authenticate:");
 		System.out.println(getHandler.getRequest());
+		
+		System.out.print("Enter PIN: ");
 		pin = myScanner.nextLine();
 		getHandler.setPin(pin);
 		
 		username = getHandler.getUserName();
-		System.out.println(username);
 		
+		System.out.print("Message to tweet: ");
 		message = myScanner.nextLine();
 		myScanner.close();
-		System.out.println(postHandler.tweet(username, message));
+		postHandler.tweet(username, message);
 	}
 }
