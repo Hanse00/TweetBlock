@@ -8,7 +8,7 @@ public class BlockInfo {
 	public static final int TWEETBLOCK_DEFAULT = 2065;
 	
 	public static final String TWEETBLOCK_UNLOCALIZED_NAME = "TweetBlock";
-	public static final String TWEETBLOCK_NAME = "TweetBlock";
+	public static final String TWEETBLOCK_NAME = "Tweet Block";
 	
 	public static final String TWEETBLOCK_TEXTURE = "tweetblock";
 }
