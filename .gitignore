@@ -9,3 +9,6 @@ bin
 
 #Don't share libraries
 lib
+
+#Don't share local twtter api keys
+*Local.java
