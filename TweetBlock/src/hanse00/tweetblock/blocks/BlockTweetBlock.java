@@ -13,7 +13,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockTweetBlock extends BlockContainer {
-	
+
 	public BlockTweetBlock(int id) {
 		super(id, Material.iron);
 		setBlockUnbreakable();
@@ -21,40 +21,40 @@ public class BlockTweetBlock extends BlockContainer {
 		setCreativeTab(CreativeTabs.tabRedstone);
 		setUnlocalizedName(BlockInfo.TWEETBLOCK_UNLOCALIZED_NAME);
 	}
-	
+
 	@Override
-	@SideOnly(Side.CLIENT)
-	public void registerIcons(IconRegister register) {
-		blockIcon = register.registerIcon(BlockInfo.TEXTURE_LOCATION + ":" + BlockInfo.TWEETBLOCK_TEXTURE);
+	public TileEntity createNewTileEntity(World world) {
+		return new TileEntityTweetBlock();
 	}
-	
+
 	@Override
-	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float offsetX, float offsetY, float offsetZ) {
-		//TODO: GUI code goes here
+	public boolean onBlockActivated(World world, int x, int y, int z,
+			EntityPlayer player, int side, float offsetX, float offsetY,
+			float offsetZ) {
+		// TODO: GUI code goes here
 		if (!world.isRemote) {
 			TileEntity tile = world.getBlockTileEntity(x, y, z);
-			
+
 			if (tile != null && tile instanceof TileEntityTweetBlock) {
-				TileEntityTweetBlock tweetTile = (TileEntityTweetBlock)tile;
-				
+				TileEntityTweetBlock tweetTile = (TileEntityTweetBlock) tile;
+
 				tweetTile.tweet("Hanse00", "Hello from Minecraft!");
 			}
 		}
 		return true;
 	}
-	
+
 	/*
-	@Override
-	public void onNeighborBlockChange(World world, int x, int y, int z, int id) {
-		//TODO: Make sure only to do this if not previously powered
-		if (!world.isRemote && world.isBlockIndirectlyGettingPowered(x, y, z)) {
-			System.out.println("Redstone powered!");
-		}
-	}
-	*/
+	 * @Override public void onNeighborBlockChange(World world, int x, int y,
+	 * int z, int id) { //TODO: Make sure only to do this if not previously
+	 * powered if (!world.isRemote && world.isBlockIndirectlyGettingPowered(x,
+	 * y, z)) { System.out.println("Redstone powered!"); } }
+	 */
 
 	@Override
-	public TileEntity createNewTileEntity(World world) {
-		return new TileEntityTweetBlock();
+	@SideOnly(Side.CLIENT)
+	public void registerIcons(IconRegister register) {
+		blockIcon = register.registerIcon(BlockInfo.TEXTURE_LOCATION + ":"
+				+ BlockInfo.TWEETBLOCK_TEXTURE);
 	}
 }
