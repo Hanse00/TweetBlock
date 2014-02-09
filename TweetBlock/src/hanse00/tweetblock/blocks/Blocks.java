@@ -3,6 +3,7 @@ package hanse00.tweetblock.blocks;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import hanse00.tweetblock.reference.BlockInfo;
+import hanse00.tweetblock.tileentities.TileEntityTweetBlock;
 import net.minecraft.block.Block;
 
 public class Blocks {
@@ -18,4 +19,8 @@ public class Blocks {
 	public static void initLang() {
 		LanguageRegistry.addName(tweetBlock, BlockInfo.TWEETBLOCK_NAME);
 	}
-}
+	
+	public static void registerTileEntities() {
+		GameRegistry.registerTileEntity(TileEntityTweetBlock.class, BlockInfo.TWEETBLOCK_TILE_KEY);
+	}
+ }

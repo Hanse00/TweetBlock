@@ -35,6 +35,7 @@ public class TweetBlock {
 	@EventHandler
 	public void init(FMLInitializationEvent event) {
 		Blocks.initLang();
+		Blocks.registerTileEntities();
 	}
 	
 	@EventHandler

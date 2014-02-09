@@ -1,4 +1,5 @@
 
+
 public class Reference {
 	static final String GET_CONSUMER_KEY = "XXX";
 	static final String GET_CONSUMER_SECRET = "XXX";

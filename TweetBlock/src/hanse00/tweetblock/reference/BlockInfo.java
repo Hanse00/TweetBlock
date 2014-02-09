@@ -11,4 +11,6 @@ public class BlockInfo {
 	public static final String TWEETBLOCK_NAME = "Tweet Block";
 	
 	public static final String TWEETBLOCK_TEXTURE = "tweetblock";
+	
+	public static final String TWEETBLOCK_TILE_KEY = "TweetBlockTile";
 }
