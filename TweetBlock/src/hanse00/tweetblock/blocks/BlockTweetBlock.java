@@ -38,18 +38,24 @@ public class BlockTweetBlock extends BlockContainer {
 			if (tile != null && tile instanceof TileEntityTweetBlock) {
 				TileEntityTweetBlock tweetTile = (TileEntityTweetBlock) tile;
 
-				tweetTile.tweet("Hanse00", "Hello from Minecraft!");
+				tweetTile.openGUI();
 			}
 		}
 		return true;
 	}
 
-	/*
-	 * @Override public void onNeighborBlockChange(World world, int x, int y,
-	 * int z, int id) { //TODO: Make sure only to do this if not previously
-	 * powered if (!world.isRemote && world.isBlockIndirectlyGettingPowered(x,
-	 * y, z)) { System.out.println("Redstone powered!"); } }
-	 */
+	@Override public void onNeighborBlockChange(World world, int x, int y, int z, int id) {
+		//TODO: Make sure only to do this if not previously powered
+		if (!world.isRemote) {
+			TileEntity tile = world.getBlockTileEntity(x, y, z);
+			
+			if (tile != null && tile instanceof TileEntityTweetBlock) {
+				TileEntityTweetBlock tweetTile = (TileEntityTweetBlock)tile;
+				
+				tweetTile.triggerRedstone();
+			}
+		}
+	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
