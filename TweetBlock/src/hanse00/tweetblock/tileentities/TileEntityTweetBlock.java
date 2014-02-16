@@ -9,6 +9,7 @@ public class TileEntityTweetBlock extends TileEntity {
 	private TweetHandler	postHandler;
 	private String			username;
 	private String			message;
+	private boolean			isPowered;
 
 	public TileEntityTweetBlock() {
 		postHandler = new TweetHandler(TweetInfo.POST_CONSUMER_KEY,
@@ -16,6 +17,7 @@ public class TileEntityTweetBlock extends TileEntity {
 				TweetInfo.ACCESS_SECRET);
 		username = "Hanse00";
 		message = "This is another ingame tweet";
+		isPowered = false;
 	}
 
 	public void tweet() {
@@ -23,8 +25,13 @@ public class TileEntityTweetBlock extends TileEntity {
 	}
 
 	public void triggerRedstone() {
-		//TODO: Check if redstone state has changed, then tweet
-		System.out.println("Redstone triggered!");
+		if (this.getWorldObj().isBlockIndirectlyGettingPowered(xCoord, yCoord, zCoord) && !isPowered) {
+			isPowered = true;
+			System.out.println("Redstone triggered!");
+		}
+		else if (!this.getWorldObj().isBlockIndirectlyGettingPowered(xCoord, yCoord, zCoord) && isPowered) {
+			isPowered = false;
+		}
 	}
 
 	public void openGUI() {

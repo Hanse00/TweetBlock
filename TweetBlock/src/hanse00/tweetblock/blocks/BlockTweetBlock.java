@@ -44,7 +44,8 @@ public class BlockTweetBlock extends BlockContainer {
 		return true;
 	}
 
-	@Override public void onNeighborBlockChange(World world, int x, int y, int z, int id) {
+	@Override
+	public void onNeighborBlockChange(World world, int x, int y, int z, int id) {
 		//TODO: Make sure only to do this if not previously powered
 		if (!world.isRemote) {
 			TileEntity tile = world.getBlockTileEntity(x, y, z);
@@ -56,6 +57,12 @@ public class BlockTweetBlock extends BlockContainer {
 			}
 		}
 	}
+	
+	@Override
+    public void onBlockAdded(World par1World, int par2, int par3, int par4)
+    {
+        this.onNeighborBlockChange(par1World, par2, par3, par4, blockID);
+    }
 
 	@Override
 	@SideOnly(Side.CLIENT)
